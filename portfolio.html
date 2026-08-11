@@ -164,10 +164,10 @@
 
     /* === Section headers — editorial style === */
     .section {
-      padding: 4rem 0;
+      padding: 2.8rem 0;
     }
     .section-head {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .section-head .section-label {
       font-size: 0.72rem;
@@ -346,14 +346,14 @@
 
     /* === About: stats — card grid === */
     .stats {
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.7rem;
     }
     .stats .stat {
       background: var(--bg-soft);
-      padding: 1.5rem 1.2rem;
+      padding: 1.1rem 0.8rem;
       border-radius: 8px;
       text-align: center;
       border: 1px solid var(--rule);
@@ -379,15 +379,15 @@
     .stats .stat:hover::before { transform: scaleX(1); }
     .stats .stat .num {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--accent);
       line-height: 1.1;
     }
     .stats .stat .label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--muted);
-      margin-top: 0.4rem;
+      margin-top: 0.3rem;
       letter-spacing: 0.02em;
     }
 
@@ -667,15 +667,25 @@
       .gallery { grid-template-columns: 1fr; }
       .photos { column-count: 2; }
       .layout-grid { grid-template-columns: 1fr; }
+      .hero { padding: 2rem 0 1.5rem; }
       .hero h1 { font-size: 2rem; }
+      .hero .profile-wrap { width: 100px; height: 100px; margin: 0 auto 0.8rem; }
       nav.topnav .nav-inner { gap: 1rem; }
       nav.topnav a { font-size: 0.72rem; }
-      .stats { flex-direction: row; flex-wrap: wrap; }
-      .stats .stat { min-width: 50%; }
-      .work-list a { gap: 0.8rem; }
+      .section { padding: 2rem 0; }
+      .section-head { margin-bottom: 1.5rem; }
+      .sub-head { margin: 1.8rem 0 1rem; }
+      .cat-head { margin: 1.3rem 0 0.7rem; }
+      .stats { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+      .stats .stat { padding: 0.7rem 0.3rem; }
+      .stats .stat .num { font-size: 1rem; }
+      .stats .stat .label { font-size: 0.6rem; }
+      .work-list a { gap: 0.8rem; padding: 0.5rem 0; }
       .work-list .thumb { width: 80px; height: 45px; }
+      .work-list .title { font-size: 0.8rem; }
       .works-tabs a { font-size: 0.78rem; padding: 0.3rem 0.8rem; }
       .section-head-row { flex-direction: column; align-items: flex-start; }
+      .layout-grid { gap: 1.2rem; }
       footer .foot-contacts { font-size: 0.76rem; }
       footer .contact-row { flex-direction: column; align-items: center; gap: 0.2rem; }
       footer .contact-label { text-align: center; }
