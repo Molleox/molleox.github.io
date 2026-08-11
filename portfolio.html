@@ -637,6 +637,7 @@
       justify-content: center;
       align-items: baseline;
       gap: 0.8rem;
+      flex-wrap: wrap;
     }
     footer .contact-label {
       font-size: 0.7rem;
@@ -675,8 +676,12 @@
       .work-list .thumb { width: 80px; height: 45px; }
       .works-tabs a { font-size: 0.78rem; padding: 0.3rem 0.8rem; }
       .section-head-row { flex-direction: column; align-items: flex-start; }
-      footer .contact-row { flex-direction: column; gap: 0.2rem; }
+      footer .foot-contacts { font-size: 0.76rem; }
+      footer .contact-row { flex-direction: column; align-items: center; gap: 0.2rem; }
       footer .contact-label { text-align: center; }
+      footer .contact-row .sep { display: none; }
+      footer .contact-row > a { display: block; }
+      footer .foot-message { font-size: 0.78rem; }
     }
     @media (max-width: 400px) {
       .photos { column-count: 1; }
