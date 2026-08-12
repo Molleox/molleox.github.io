@@ -322,12 +322,12 @@
       transform: translateY(-3px);
     }
 
-    /* === About: skills — pill tags === */
+    /* === About: skills — expandable tags === */
     .skills {
       display: flex; flex-wrap: wrap;
       gap: 0.5rem; margin-top: 1rem;
     }
-    .skills span {
+    .skills .skill-tag {
       font-size: 0.78rem;
       color: var(--muted);
       padding: 0.3rem 0.85rem;
@@ -335,13 +335,44 @@
       border: 1px solid var(--rule);
       border-radius: 20px;
       transition: all 0.25s ease;
-      cursor: default;
+      cursor: pointer;
+      user-select: none;
     }
-    .skills span:hover {
+    .skills .skill-tag:hover {
       color: var(--accent);
       border-color: var(--accent-soft);
       background: rgba(58, 81, 105, 0.04);
       transform: translateY(-2px);
+    }
+    .skills .skill-tag.active {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .skill-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1);
+      margin-top: 0;
+    }
+    .skill-detail.open {
+      max-height: 500px;
+      margin-top: 0.8rem;
+    }
+    .skill-detail-inner {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      text-align: justify;
+      padding: 1rem 1.2rem;
+      background: var(--bg-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+    }
+    .skill-detail-inner strong {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     /* === About: stats — card grid === */
@@ -699,6 +730,47 @@
       .gallery { grid-template-columns: repeat(2, 1fr); }
       .work-list .thumb { width: 64px; height: 36px; }
     }
+
+    /* === Print-only skill details (hidden on screen) === */
+    .skill-print-all { display: none; }
+    .skill-print-item {
+      margin-bottom: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      background: var(--bg-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      break-inside: avoid;
+    }
+    .skill-print-title {
+      font-family: var(--font-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .skill-print-body {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      text-align: justify;
+    }
+    .skill-print-body strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* === Print: expand all, show everything === */
+    @media print {
+      .skill-print-all { display: block; }
+      .skills,
+      .skill-detail { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      nav.topnav { display: none; }
+      body { color: #000; }
+      .section { padding: 1rem 0; }
+      .hero { padding: 1rem 0; }
+      .skill-detail { max-height: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -739,7 +811,48 @@
 
       <div class="about-sub">能力标签</div>
       <div class="skills">
-        <span>内容策划与审核</span><span>资讯整合</span><span>人物采访</span><span>视觉设计</span><span>摄影摄像</span><span>公众号运营</span><span>团队管理</span>
+        <span class="skill-tag" data-skill="0">内容策划与审核</span>
+        <span class="skill-tag" data-skill="1">资讯整合</span>
+        <span class="skill-tag" data-skill="2">人物采访</span>
+        <span class="skill-tag" data-skill="3">视觉设计</span>
+        <span class="skill-tag" data-skill="4">摄影摄像</span>
+        <span class="skill-tag" data-skill="5">公众号运营</span>
+        <span class="skill-tag" data-skill="6">团队管理</span>
+      </div>
+      <div class="skill-detail" id="skill-detail">
+        <div class="skill-detail-inner" id="skill-detail-inner"></div>
+      </div>
+
+      <!-- Print-only: all skill details fully expanded -->
+      <div class="skill-print-all" id="skill-print-all">
+        <div class="skill-print-item">
+          <div class="skill-print-title">内容策划与审核</div>
+          <div class="skill-print-body">具备从选题策划到内容审核的全链路能力。代表作包括：<strong>《大学之"道"》</strong>以路牌为切口撬动校史共鸣；<strong>《八一特刊》</strong>以书信体突破宏大叙事惯性；<strong>《军训指南》</strong>与<strong>《体测攻略》</strong>以用户痛点为导向输出实用内容。在官微内容审核中，建立"选题三问"标准（谁看？为什么看？看完留下什么？），确保每篇推文兼具传播力与价值感。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">资讯整合</div>
+          <div class="skill-print-body">擅长将复杂、零散的校园信息整合为清晰、用户友好的攻略型内容。代表作包括：<strong>《鼓楼校区畅游篇》</strong>将校史、建筑、生活动线融合为沉浸式导览；<strong>《鼓楼图书馆全攻略》</strong>从预约规则到座位动线一站式梳理；<strong>《走进南大从@NJU公众号开始》</strong>系统串联校内新媒体矩阵；<strong>《教育教学资讯速览》</strong>形成可复用的栏目化资讯整合模板。写作理念是让用户"收藏即够用"。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">人物采访</div>
+          <div class="skill-print-body">走通从提纲拟定、深度访谈到成稿撰写的全流程。代表作<strong>《刘陈帅宇：寻光千万里，此心自光明》</strong>3天阅读量突破2,136，避免履历罗列，以"抉择瞬间"建构人物立体形象。累计采访<strong>奖学金得主、国奖人物、朋辈导师</strong>等南大优秀学子7人。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">视觉设计</div>
+          <div class="skill-print-body">熟练运用<strong>秀米、135编辑器、Canva</strong>等完成公众号推文排版与海报设计。排版代表作包括：<strong>《石榴新村主题党日》</strong>（党建类，庄重大气）、<strong>《北京名企出海线》</strong>（纪实类，简洁商务）、<strong>《献血推文》</strong>（公益类，温暖有力）、<strong>年度人物郭妍佳与张雨龙人物稿</strong>（人物类，根据人物气质匹配风格）、<strong>《袁咨桐英烈精神》</strong>（红色主题，肃穆端庄）。根据不同内容调性匹配排版语言，形成"内容气质→排版风格"的方法论。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">摄影摄像</div>
+          <div class="skill-print-body">具备校园活动、人物肖像、场景纪实等摄影能力。作品集中所有推文配图均由本人拍摄或参与拍摄，涵盖<strong>校园建筑、活动现场、人物专访</strong>等多元场景。擅长捕捉自然瞬间与构图叙事，图片多次用于官微头条封面及内页配图。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">公众号运营</div>
+          <div class="skill-print-body">深度参与"南大育教""政青春"微信公众号运营，熟悉公众号后台全流程操作。核心能力包括：<strong>数据分析</strong>——通过后台数据复盘优化选题方向，建立"阅读量→分享率→涨粉"的复盘SOP；<strong>栏目化运营</strong>——参与教育资讯速览等固定栏目规划，形成稳定的用户预期；<strong>节点排期</strong>——统筹毕业季、迎新季、考试周等校园关键节点的内容节奏。我的运营理念是用数据驱动内容决策。</div>
+        </div>
+        <div class="skill-print-item">
+          <div class="skill-print-title">团队管理</div>
+          <div class="skill-print-body">在"南大育教""政青春"微信公众号运营团队中，承担<strong>内容统筹与跨部门协调</strong>工作。核心经验包括对接校内各院、学生组织的内容供稿与审核；协调排版、摄影、撰稿等多角色协作完成节点大稿；统计员工绩效，发放员工工资。具备良好的沟通能力与执行力，能够推动多人协作项目高效落地。</div>
+        </div>
       </div>
 
       <div class="about-sub">数据成果</div>
@@ -1022,6 +1135,39 @@
   </div>
 
   <script>
+    // Skill tags — accordion
+    (function() {
+      var details = [
+        '具备从选题策划到内容审核的全链路能力。代表作包括：<strong>《大学之"道"》</strong>以路牌为切口撬动校史共鸣；<strong>《八一特刊》</strong>以书信体突破宏大叙事惯性；<strong>《军训指南》</strong>与<strong>《体测攻略》</strong>以用户痛点为导向输出实用内容。在官微内容审核中，建立"选题三问"标准（谁看？为什么看？看完留下什么？），确保每篇推文兼具传播力与价值感。',
+        '擅长将复杂、零散的校园信息整合为清晰、用户友好的攻略型内容。代表作包括：<strong>《鼓楼校区畅游篇》</strong>将校史、建筑、生活动线融合为沉浸式导览；<strong>《鼓楼图书馆全攻略》</strong>从预约规则到座位动线一站式梳理；<strong>《走进南大从@NJU公众号开始》</strong>系统串联校内新媒体矩阵；<strong>《教育教学资讯速览》</strong>形成可复用的栏目化资讯整合模板。写作理念是让用户"收藏即够用"。',
+        '走通从提纲拟定、深度访谈到成稿撰写的全流程。代表作<strong>《刘陈帅宇：寻光千万里，此心自光明》</strong>3天阅读量突破2,136，避免履历罗列，以"抉择瞬间"建构人物立体形象。累计采访<strong>奖学金得主、国奖人物、朋辈导师</strong>等南大优秀学子7人。',
+        '熟练运用<strong>秀米、135编辑器、Canva</strong>等完成公众号推文排版与海报设计。排版代表作包括：<strong>《石榴新村主题党日》</strong>（党建类，庄重大气）、<strong>《北京名企出海线》</strong>（纪实类，简洁商务）、<strong>《献血推文》</strong>（公益类，温暖有力）、<strong>年度人物郭妍佳与张雨龙人物稿</strong>（人物类，根据人物气质匹配风格）、<strong>《袁咨桐英烈精神》</strong>（红色主题，肃穆端庄）。根据不同内容调性匹配排版语言，形成"内容气质→排版风格"的方法论。',
+        '具备校园活动、人物肖像、场景纪实等摄影能力。作品集中所有推文配图均由本人拍摄或参与拍摄，涵盖<strong>校园建筑、活动现场、人物专访</strong>等多元场景。擅长捕捉自然瞬间与构图叙事，图片多次用于官微头条封面及内页配图。',
+        '深度参与"南大育教""政青春"微信公众号运营，熟悉公众号后台全流程操作。核心能力包括：<strong>数据分析</strong>——通过后台数据复盘优化选题方向，建立"阅读量→分享率→涨粉"的复盘SOP；<strong>栏目化运营</strong>——参与教育资讯速览等固定栏目规划，形成稳定的用户预期；<strong>节点排期</strong>——统筹毕业季、迎新季、考试周等校园关键节点的内容节奏。我的运营理念是用数据驱动内容决策。',
+        '在"南大育教""政青春"微信公众号运营团队中，承担<strong>内容统筹与跨部门协调</strong>工作。核心经验包括对接校内各院、学生组织的内容供稿与审核；协调排版、摄影、撰稿等多角色协作完成节点大稿；统计员工绩效，发放员工工资。具备良好的沟通能力与执行力，能够推动多人协作项目高效落地。'
+      ];
+      var tags = document.querySelectorAll('.skill-tag');
+      var detail = document.getElementById('skill-detail');
+      var detailInner = document.getElementById('skill-detail-inner');
+      var current = -1;
+      tags.forEach(function(tag) {
+        tag.addEventListener('click', function() {
+          var idx = parseInt(tag.getAttribute('data-skill'));
+          if (current === idx) {
+            detail.classList.remove('open');
+            tag.classList.remove('active');
+            current = -1;
+          } else {
+            tags.forEach(function(t) { t.classList.remove('active'); });
+            tag.classList.add('active');
+            detailInner.innerHTML = details[idx];
+            detail.classList.add('open');
+            current = idx;
+          }
+        });
+      });
+    })();
+
     // Lightbox
     (function() {
       var lb = document.getElementById('lightbox');
