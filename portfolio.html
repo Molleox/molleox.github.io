@@ -664,8 +664,9 @@
 
     /* === Responsive === */
     @media (max-width: 600px) {
-      .gallery { grid-template-columns: 1fr; }
-      .photos { column-count: 2; }
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .photos { column-count: 3; column-gap: 0.4rem; }
+      .photos .pitem { margin-bottom: 0.4rem; }
       .layout-grid { grid-template-columns: 1fr; }
       .hero { padding: 2rem 0 1.5rem; }
       .hero h1 { font-size: 2rem; }
@@ -694,7 +695,8 @@
       footer .foot-message { font-size: 0.78rem; }
     }
     @media (max-width: 400px) {
-      .photos { column-count: 1; }
+      .photos { column-count: 2; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
       .work-list .thumb { width: 64px; height: 36px; }
     }
   </style>
