@@ -1027,8 +1027,6 @@
       document.querySelectorAll('.gitem, .pitem').forEach(function(item) {
         item.addEventListener('click', function(e) {
           e.preventDefault();
-          lbImg.src = item.getAttribute('data-src');
-          lb.classList.add('active');
         });
       });
       lb.addEventListener('click', function() { lb.classList.remove('active'); lbImg.src = ''; });
