@@ -190,14 +190,24 @@ ul.spaced-list li {
   <table><tbody>
     <tr>
       <td>
-        <ul class="spaced-list">
+        <ul class="spaced-list" id="news-list">
           <li><b>[2026.08]</b> 我的个人<a href="https://molleox.github.io/portfolio.html">作品集</a>上线啦！欢迎您的阅览～</li>
           <li><b>[2026.08]</b> 我的个人主页上线啦！欢迎来到我的小空间 ✿</li>
           <li><b>[2026.07]</b> 我来到南京市应急管理局实习，感谢学院的举荐与领导的指导。</li>
           <li><b>[2025.12]</b> 我荣获 2025 年度国家奖学金，深感荣幸，亦知责任在肩。</li>
-          <li><b>[2025.09]</b> 我前往日本庆应义塾大学，开启为期半年的交换学习。</li>
-          <li><b>[2025.08]</b> 我奔赴团中央井冈山教育基地，完成为期13 天的思想赋能。</li>
+          <li class="news-extra" style="display:none;"><b>[2025.09]</b> 我前往日本庆应义塾大学，开启为期半年的交换学习。</li>
+          <li class="news-extra" style="display:none;"><b>[2025.08]</b> 我奔赴团中央井冈山教育基地，完成为期13 天的思想赋能。</li>
         </ul>
+        <a id="news-toggle" href="javascript:void(0)" onclick="toggleNews()" style="font-size:13px;color:#1e5cad;">展开更多 ▾</a>
+        <script>
+        function toggleNews(){
+          var extras=document.querySelectorAll('.news-extra');
+          var btn=document.getElementById('news-toggle');
+          var hidden=extras[0].style.display==='none';
+          extras.forEach(function(e){e.style.display=hidden?'':'none';});
+          btn.textContent=hidden?'收起 ▴':'展开更多 ▾';
+        }
+        </script>
       </td>
     </tr>
   </tbody></table>
